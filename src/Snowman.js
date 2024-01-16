@@ -38,6 +38,9 @@ function Snowman({
    if guessed letters are {a,p,e}, show "app_e" for "apple"
    */
   function guessedWord() {
+    if (nWrong >= maxWrong) {
+      return answer;
+    }
     return answer
         .split("")
         .map(ltr => (guessedLetters.has(ltr) ? ltr : "_"));
@@ -78,7 +81,7 @@ function Snowman({
         <img src={(images)[nWrong]} alt={nWrong} />
         <p className="Snowman-word-count">Number wrong: {nWrong}</p>
         <p className="Snowman-word">{guessedWord()}</p>
-        <p>{generateButtons()}</p>
+        <p>{nWrong < maxWrong ? generateButtons() : "You lose!"}</p>
       </div>
   );
 }
