@@ -81,6 +81,19 @@ function Snowman({
     ));
   }
 
+  function resultMessage() {
+    const currWord = guessedWord();
+    if (nWrong >= maxWrong) {
+      return "You lose!";
+    }
+    else if (!currWord.includes("_")) {
+      return "You win!";
+    }
+    else {
+      return "buttons";
+    }
+  }
+
   /** Restarts the game, clear all guesses, set a new word for answer. */
 
   function restart(){
@@ -94,7 +107,7 @@ function Snowman({
         <img src={(images)[nWrong]} alt={nWrong} />
         <p className="Snowman-word-count">Number wrong: {nWrong}</p>
         <p className="Snowman-word">{guessedWord()}</p>
-        <p>{nWrong < maxWrong ? generateButtons() : "You lose!"}</p>
+        <p>{resultMessage() === "buttons" ? generateButtons() : resultMessage()}</p>
         <button className="Snowman-restart" onClick={restart}>Restart</button>
       </div>
   );
