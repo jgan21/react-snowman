@@ -22,6 +22,8 @@ import img6 from "./6.png";
  * - nWrong: # wrong guesses so far
  * - guessedLetters: set of guessed letters (good and bad) so far
  * - answer: selected secret word*
+ *
+ * App -> Snowman
  */
 
 function Snowman({
@@ -36,7 +38,8 @@ function Snowman({
   const [answer, setAnswer] = useState(randomWord(words));
 
   /** guessedWord: show current-state of word:
-   if guessed letters are {a,p,e}, show "app_e" for "apple"
+   if guessed letters are {a,p,e}, show "app_e" for "apple",
+   if number of wrong guesses is more than max guesses, show the correct answer.
    */
   function guessedWord() {
     if (nWrong >= maxWrong) {
@@ -64,6 +67,7 @@ function Snowman({
   }
 
   /** generateButtons: return array of letter buttons to render */
+
   function generateButtons() {
     return "abcdefghijklmnopqrstuvwxyz".split("").map(ltr => (
         <button
@@ -77,12 +81,21 @@ function Snowman({
     ));
   }
 
+  /** Restarts the game, clear all guesses, set a new word for answer. */
+
+  function restart(){
+    setNWrong(0);
+    setGuessedLetters(new Set());
+    setAnswer(randomWord(words));
+  }
+
   return (
       <div className="Snowman">
         <img src={(images)[nWrong]} alt={nWrong} />
         <p className="Snowman-word-count">Number wrong: {nWrong}</p>
         <p className="Snowman-word">{guessedWord()}</p>
         <p>{nWrong < maxWrong ? generateButtons() : "You lose!"}</p>
+        <button className="Snowman-restart" onClick={restart}>Restart</button>
       </div>
   );
 }

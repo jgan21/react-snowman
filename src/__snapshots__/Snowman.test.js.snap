@@ -23,6 +23,11 @@ exports[`snapshot matches snapshot 1`] = `
     <p>
       You lose!
     </p>
+    <button
+      class="Snowman-restart"
+    >
+      Restart
+    </button>
   </div>
 </div>
 `;
